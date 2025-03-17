@@ -1,13 +1,13 @@
 // sidebar
-$menuText:#bfcbd9;
-$menuActiveText:#409EFF;
-$subMenuActiveText:#f4f4f5; //https://github.com/ElemeFE/element/issues/12951
+$menuText:#f1d4d3;
+$menuActiveText:#ffcc29;
+$subMenuActiveText:#ffffff; //https://github.com/ElemeFE/element/issues/12951
 
-$menuBg:#304156;
-$menuHover:#263445;
+$menuBg: #be211a;      
+$menuHover: #9c1b16;   // Slightly darker red for hover state
 
-$subMenuBg:#1f2d3d;
-$subMenuHover:#001528;
+$subMenuBg: #721510;   
+$subMenuHover: #4a0e0a; // Very dark red for submenu hover
 
 $sideBarWidth: 210px;
 

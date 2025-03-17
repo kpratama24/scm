@@ -2,8 +2,8 @@
   <div class="app-container">
     <el-alert type="success" center close-text="朕知道了">
       <el-link icon="el-icon-warning" type="success"
-        href="https://github.com/starsliao/TenSunS/blob/main/docs/blackbox%E7%AB%99%E7%82%B9%E7%9B%91%E6%8E%A7.md"
-        target="_blank">应用场景：如何优雅的使用Consul管理Blackbox站点监控</el-link>
+        href="#"
+        target="_blank">Consul:Blackbox</el-link>
     </el-alert>
     <div class="filter-container" style="flex: 1;display: flex;align-items: center;height: 50px;">
       <el-select v-model="listQuery.module" placeholder="监控类型" clearable collapse-tags style="width: 150px"

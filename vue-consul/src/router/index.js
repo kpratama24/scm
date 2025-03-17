@@ -54,212 +54,45 @@ export const constantRoutes = [
       meta: { title: 'Dashboard', icon: 'dashboard' }
     }]
   },
-
-  {
-    path: '/consul',
-    component: Layout,
-    redirect: '/consul/services',
-    name: 'Consul 管理',
-    meta: { title: 'Consul 管理', icon: 'example' },
-    children: [
-      {
-        path: 'hosts',
-        name: 'Hosts',
-        component: () => import('@/views/consul/hosts'),
-        meta: { title: 'Hosts', icon: 'el-icon-school' }
-      },
-      {
-        path: 'services',
-        name: '服务组',
-        component: () => import('@/views/consul/services'),
-        meta: { title: '服务组', icon: 'el-icon-news' }
-      },
-      {
-        path: 'instances',
-        name: '实例管理',
-        component: () => import('@/views/consul/instances'),
-        meta: { title: '实例管理', icon: 'el-icon-connection' }
-      }
-    ]
-  },
   {
     path: '/nodes',
     component: Layout,
     redirect: '/nodes/jobs',
-    name: '云资源管理',
-    meta: { title: '云资源管理', icon: 'el-icon-shopping-bag-2' },
+    name: 'Resources',
+    meta: { title: 'Resources', icon: 'el-icon-shopping-bag-2' },
     children: [
-      {
-        path: 'jobs',
-        name: '接入云厂商',
-        component: () => import('@/views/node-exporter/jobs'),
-        meta: { title: '接入云厂商', icon: 'el-icon-school' }
-      },
-      {
-        path: 'exp',
-        name: '余额与到期通知',
-        component: () => import('@/views/node-exporter/exp'),
-        meta: { title: '余额与到期通知', icon: 'el-icon-alarm-clock' }
-      },
       {
         path: 'ecs',
         name: 'ECS',
         component: () => import('@/views/node-exporter/index'),
-        meta: { title: 'ECS管理', icon: 'el-icon-cpu' },
+        meta: { title: 'ECS', icon: 'el-icon-cpu' },
         children: [
           {
-            path: 'jms',
-            name: 'JumpServer',
-            component: () => import('@/views/jms/index'),
-            meta: { title: 'JumpServer 同步', icon: 'el-icon-copy-document' }
-          },
-          {
-            path: 'lists',
-            name: '云主机列表',
-            component: () => import('@/views/node-exporter/lists'),
-            meta: { title: '云主机列表', icon: 'el-icon-cloudy' }
-          },
-          {
             path: 'self',
-            name: '自建主机管理',
+            name: 'ECS List',
             component: () => import('@/views/node-exporter/self'),
-            meta: { title: '自建主机管理', icon: 'el-icon-s-platform' }
+            meta: { title: 'ECS List', icon: 'el-icon-s-platform' }
           },
           {
             path: 'pconfig',
             name: 'node-pconfig',
             component: () => import('@/views/node-exporter/pconfig'),
-            meta: { title: 'Prometheus 配置', icon: 'el-icon-set-up' }
+            meta: { title: 'Prometheus Conf', icon: 'el-icon-set-up' }
           },
           {
             path: 'rules',
             name: 'node-rules',
             component: () => import('@/views/node-exporter/rules'),
-            meta: { title: '告警规则', icon: 'el-icon-bell' }
+            meta: { title: 'Node Rules', icon: 'el-icon-bell' }
           },
           {
             path: 'grafana',
             name: 'node-grafana',
             component: () => import('@/views/node-exporter/grafana'),
-            meta: { title: 'Grafana 看板', icon: 'el-icon-data-line' }
+            meta: { title: 'Grafana Setup', icon: 'el-icon-data-line' }
           }
         ]
       },
-      {
-        path: 'rds',
-        name: 'RDS',
-        component: () => import('@/views/rds/index'),
-        meta: { title: 'MySQL管理', icon: 'el-icon-coin' },
-        children: [
-          {
-            path: 'lists',
-            name: '云MySQL列表',
-            component: () => import('@/views/rds/lists'),
-            meta: { title: '云MySQL列表', icon: 'el-icon-cloudy' }
-          },
-          {
-            path: 'self',
-            name: '自建MySQL管理',
-            component: () => import('@/views/rds/self'),
-            meta: { title: '自建MySQL管理', icon: 'el-icon-s-platform' }
-          },
-          {
-            path: 'pconfig',
-            name: 'rds-pconfig',
-            component: () => import('@/views/rds/pconfig'),
-            meta: { title: 'Prometheus 配置', icon: 'el-icon-set-up' }
-          },
-          {
-            path: 'rules',
-            name: 'rds-rules',
-            component: () => import('@/views/rds/rules'),
-            meta: { title: '告警规则', icon: 'el-icon-bell' }
-          },
-          {
-            path: 'grafana',
-            name: 'rds-grafana',
-            component: () => import('@/views/rds/grafana'),
-            meta: { title: 'Grafana 看板', icon: 'el-icon-data-line' }
-          }
-        ]
-      },
-      {
-        path: 'redis',
-        name: 'REDIS',
-        component: () => import('@/views/redis/index'),
-        meta: { title: 'REDIS管理', icon: 'el-icon-guide' },
-        children: [
-          {
-            path: 'lists',
-            name: '云REDIS列表',
-            component: () => import('@/views/redis/lists'),
-            meta: { title: '云REDIS列表', icon: 'el-icon-cloudy' }
-          },
-          {
-            path: 'self',
-            name: '自建REDIS管理',
-            component: () => import('@/views/redis/self'),
-            meta: { title: '自建REDIS管理', icon: 'el-icon-s-platform' }
-          },
-          {
-            path: 'pconfig',
-            name: 'redis-pconfig',
-            component: () => import('@/views/redis/pconfig'),
-            meta: { title: 'Prometheus 配置', icon: 'el-icon-set-up' }
-          },
-          {
-            path: 'rules',
-            name: 'redis-rules',
-            component: () => import('@/views/redis/rules'),
-            meta: { title: '告警规则', icon: 'el-icon-bell' }
-          },
-          {
-            path: 'grafana',
-            name: 'redis-grafana',
-            component: () => import('@/views/redis/grafana'),
-            meta: { title: 'Grafana 看板', icon: 'el-icon-data-line' }
-          }
-        ]
-      }
-    ]
-  },
-  {
-    path: '/blackbox',
-    component: Layout,
-    redirect: '/blackbox/index',
-    name: '站点与接口监控',
-    meta: { title: '站点与接口监控', icon: 'tree' },
-    children: [
-      {
-        path: 'index',
-        name: '站点管理',
-        component: () => import('@/views/blackbox/index'),
-        meta: { title: '站点管理', icon: 'el-icon-s-order' }
-      },
-      {
-        path: 'bconfig',
-        name: 'Blackbox 配置',
-        component: () => import('@/views/blackbox/bconfig'),
-        meta: { title: 'Blackbox 配置', icon: 'el-icon-c-scale-to-original' }
-      },
-      {
-        path: 'pconfig',
-        name: 'Prometheus 配置',
-        component: () => import('@/views/blackbox/pconfig'),
-        meta: { title: 'Prometheus 配置', icon: 'el-icon-set-up' }
-      },
-      {
-        path: 'rules',
-        name: '告警规则',
-        component: () => import('@/views/blackbox/rules'),
-        meta: { title: '告警规则', icon: 'el-icon-bell' }
-      },
-      {
-        path: 'grafana',
-        name: 'Grafana 看板',
-        component: () => import('@/views/blackbox/grafana'),
-        meta: { title: 'Grafana 看板', icon: 'el-icon-data-line' }
-      }
     ]
   },
   {
@@ -267,69 +100,10 @@ export const constantRoutes = [
     component: Layout,
     children: [{
       path: 'index',
-      name: '漏洞通知',
+      name: 'Alert',
       component: () => import('@/views/avd/index'),
-      meta: { title: '漏洞通知', icon: 'el-icon-chat-line-square' }
+      meta: { title: 'Alert', icon: 'el-icon-chat-line-square' }
     }]
-  },
-  {
-    path: '/settings',
-    component: Layout,
-    redirect: '/settings/logo',
-    name: '系统设置',
-    meta: { title: '系统设置', icon: 'el-icon-setting' },
-    children: [
-      {
-        path: 'logo',
-        name: '自定义登录页',
-        component: () => import('@/views/ldap/logo'),
-        meta: { title: '自定义登录页', icon: 'el-icon-ice-cream' }
-      },
-      {
-        path: 'ldap',
-        name: '统一认证',
-        component: () => import('@/views/ldap/index'),
-        meta: { title: '统一认证', icon: 'el-icon-lock' }
-      },
-      {
-        path: 'user',
-        name: '用户管理',
-        component: () => import('@/views/ldap/user'),
-        meta: { title: '用户管理', icon: 'el-icon-user' }
-      }
-    ]
-  },
-  {
-    path: '/link',
-    component: Layout,
-    meta: { title: '快速链接', icon: 'link' },
-    children: [
-      {
-        path: 'https://github.com/starsliao/TenSunS#%E7%89%B9%E5%88%AB%E9%B8%A3%E8%B0%A2',
-        meta: { title: '赞赏与鸣谢', icon: 'el-icon-cold-drink' }
-      },
-      {
-        path: 'https://starsl.cn',
-        meta: { title: 'StarsL.cn', icon: 'el-icon-s-custom' }
-      },
-      {
-        path: 'https://github.com/starsliao?tab=repositories',
-        meta: { title: '我的 Github', icon: 'el-icon-star-off' }
-      },
-      {
-        path: 'https://grafana.com/orgs/starsliao/dashboards',
-        meta: { title: '我的 Grafana', icon: 'el-icon-odometer' }
-      },
-      {
-        path: 'https://starsl.cn/static/img/thanks.png',
-        meta: { title: '我的公众号', icon: 'el-icon-chat-dot-round' }
-      },
-      {
-        path: 'https://element.eleme.cn/#/zh-CN/component/icon',
-        meta: { title: 'Element', icon: 'el-icon-eleme' }
-      }
-
-    ]
   },
 
   // 404 page must be placed at the end !!!

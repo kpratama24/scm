@@ -1,55 +1,55 @@
 <template>
   <div class="app-container">
-    <el-button class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">配置漏洞通知</el-button>
-    <el-button class="filter-item" type="warning" icon="el-icon-magic-stick" @click="handleRun">测试一次</el-button>
-    <el-dialog title="配置漏洞通知" :visible.sync="dialogFormVisible" width="45%">
+    <el-button class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">Configure Vulnerability Notification</el-button>
+    <el-button class="filter-item" type="warning" icon="el-icon-magic-stick" @click="handleRun">Run Test</el-button>
+    <el-dialog title="Configure Vulnerability Notification" :visible.sync="dialogFormVisible" width="45%">
       <el-form ref="dataForm" :model="avd_config" label-position="right" label-width="auto" style="width: 90%; margin-left: 20px;">
-        <el-form-item label="漏洞采集">
+        <el-form-item label="Vulnerability Collection">
           <el-switch v-model="avd_config.switch" /><br>
           <font size="3px" color="#ff0000">
-            <li>开启采集：每小时会自动采集一次漏洞信息。</li>
-            <li>开启通知：当发现新漏洞时，会立刻推送到群机器人。</li>
+            <li>Enable Collection: Automatically collects vulnerability information every hour.</li>
+            <li>Enable Notification: When new vulnerabilities are discovered, they will be immediately pushed to the group robot.</li>
           </font>
         </el-form-item>
-        <el-form-item v-if="avd_config.switch" label="钉钉通知">
+        <el-form-item v-if="avd_config.switch" label="DingTalk Notification">
           <el-switch v-model="avd_config.dingding" />
         </el-form-item>
-        <el-form-item v-if="avd_config.switch && avd_config.dingding" required label="机器人Webhook地址">
-          <el-input v-model="avd_config.dingdingwh" type="textarea" autosize /><font size="3px" color="#ff0000">机器人安全设置的自定义关键词请设置为：<strong>漏洞告警</strong></font>
+        <el-form-item v-if="avd_config.switch && avd_config.dingding" required label="Robot Webhook Address">
+          <el-input v-model="avd_config.dingdingwh" type="textarea" autosize /><font size="3px" color="#ff0000">For the robot security settings, please set the custom keyword as: <strong>Vulnerability Alert</strong></font>
         </el-form-item>
-        <el-form-item v-if="avd_config.switch" label="企业微信通知">
+        <el-form-item v-if="avd_config.switch" label="WeChat Work Notification">
           <el-switch v-model="avd_config.wecom" />
         </el-form-item>
-        <el-form-item v-if="avd_config.switch && avd_config.wecom" required label="机器人Webhook地址">
+        <el-form-item v-if="avd_config.switch && avd_config.wecom" required label="Robot Webhook Address">
           <el-input v-model="avd_config.wecomwh" type="textarea" autosize />
         </el-form-item>
-        <el-form-item v-if="avd_config.switch" label="飞书通知">
+        <el-form-item v-if="avd_config.switch" label="Feishu Notification">
           <el-switch v-model="avd_config.feishu" />
         </el-form-item>
-        <el-form-item v-if="avd_config.switch && avd_config.feishu" required label="机器人Webhook地址">
-          <el-input v-model="avd_config.feishuwh" type="textarea" autosize /><font size="3px" color="#ff0000">机器人安全设置的自定义关键词请设置为：<strong>漏洞告警</strong></font>
+        <el-form-item v-if="avd_config.switch && avd_config.feishu" required label="Robot Webhook Address">
+          <el-input v-model="avd_config.feishuwh" type="textarea" autosize /><font size="3px" color="#ff0000">For the robot security settings, please set the custom keyword as: <strong>Vulnerability Alert</strong></font>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">
-          取消
+          Cancel
         </el-button>
         <el-button type="primary" @click="createData">
-          确认
+          Confirm
         </el-button>
       </div>
     </el-dialog>
     <el-table v-loading="listLoading" :data="avd_list" :default-sort="{ prop: 'avd_time', order: 'descending' }" border fit highlight-current-row style="width: 100%;">
       <el-table-column type="index" align="center" />
-      <el-table-column prop="avd_id" label="AVD编号" sortable align="center" width="150" />
-      <el-table-column prop="avd_name" label="漏洞名称" sortable align="center" show-overflow-tooltip>
+      <el-table-column prop="avd_id" label="AVD Number" sortable align="center" width="150" />
+      <el-table-column prop="avd_name" label="Vulnerability Name" sortable align="center" show-overflow-tooltip>
         <template slot-scope="{row}">
           <el-link type="primary" style="font-weight:bold" :href="row.avd_id_url" target="_blank"><i class="el-icon-view el-icon--left" />{{ row.avd_name }}</el-link>
         </template>
       </el-table-column>
-      <el-table-column prop="avd_type" label="漏洞类型" sortable align="center" width="220" show-overflow-tooltip />
-      <el-table-column prop="avd_stat" label="漏洞状态" sortable align="center" width="160" />
-      <el-table-column prop="avd_time" label="披露时间" sortable align="center" width="120" />
+      <el-table-column prop="avd_type" label="Vulnerability Type" sortable align="center" width="220" show-overflow-tooltip />
+      <el-table-column prop="avd_stat" label="Vulnerability Status" sortable align="center" width="160" />
+      <el-table-column prop="avd_time" label="Disclosure Time" sortable align="center" width="120" />
     </el-table>
   </div>
 
@@ -103,9 +103,9 @@ export default {
       })
     },
     handleRun() {
-      this.$confirm('此操作将立刻执行一次漏洞通知，是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('This operation will immediately execute a vulnerability notification. Continue?', 'Prompt', {
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
         type: 'warning'
       }).then(() => {
         postAvdRun().then(response => {
@@ -118,7 +118,7 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '操作已取消。'
+          message: 'Operation cancelled.'
         })
       })
     }

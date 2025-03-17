@@ -17,7 +17,7 @@
         <el-input
           ref="username"
           v-model="loginForm.username"
-          placeholder="用户名"
+          placeholder="Username"
           name="username"
           type="text"
           tabindex="1"
@@ -34,7 +34,7 @@
           ref="password"
           v-model="loginForm.password"
           :type="passwordType"
-          placeholder="密码"
+          placeholder="Password"
           name="password"
           tabindex="2"
           auto-complete="on"
@@ -45,13 +45,13 @@
         </span>
       </el-form-item>
       <!-- <el-checkbox v-model="loginForm.Ldapchecked" label="启动ldap验证" border class="ldap" /> -->
-      <el-button :loading="loading" type="primary" round class="login-button" @click.native.prevent="handleLogin">登 录</el-button>
+      <el-button :loading="loading" type="primary" round class="login-button" @click.native.prevent="handleLogin">Login</el-button>
     </el-form>
     <div align="center" class="title-container">
       <span style="font-size:12px" class="title">{{ VER }}</span>
     </div>
     <div class="footer">
-      <p style="width:100%"><center><el-link href="https://StarsL.cn" :underline="false" target="_blank">Powered by StarsL.cn</el-link></center></p>
+      <p style="width:100%"><center><el-link href="#" :underline="false">Sisnet</el-link></center></p>
     </div>
   </div>
 </template>
@@ -93,7 +93,7 @@ export default {
       passwordType: 'password',
       loginlogo: '',
       loginbgimg: '',
-      logintitle: 'Welcome to TenSunS',
+      logintitle: 'Welcome to Sisnet',
       isbig: true,
       height: '330',
       redirect: undefined

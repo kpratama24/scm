@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'TenSunS',
+  title: 'Sisnet',
 
   /**
    * @type {boolean} true | false

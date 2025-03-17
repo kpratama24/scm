@@ -1,26 +1,26 @@
 <template>
   <div class="app-container">
     <div class="filter-container" style="flex: 1;display: flex;align-items: center;height: 50px;">
-      <el-select v-model="listQuery.vendor" placeholder="机房/公司" clearable collapse-tags style="width: 150px" class="filter-item">
+      <el-select v-model="listQuery.vendor" placeholder="Datacenter/Company" clearable collapse-tags style="width: 150px" class="filter-item">
         <el-option v-for="item in vendor_list" :key="item" :label="item" :value="item" />
       </el-select>
-      <el-select v-model="listQuery.account" placeholder="租户/部门" clearable style="width: 150px" class="filter-item">
+      <el-select v-model="listQuery.account" placeholder="Tenant/Department" clearable style="width: 150px" class="filter-item">
         <el-option v-for="item in account_list" :key="item" :label="item" :value="item" />
       </el-select>
-      <el-select v-model="listQuery.region" filterable placeholder="区域/项目" clearable style="width: 150px" class="filter-item">
+      <el-select v-model="listQuery.region" filterable placeholder="Region/Project" clearable style="width: 150px" class="filter-item">
         <el-option v-for="item in region_list" :key="item" :label="item" :value="item" />
       </el-select>
-      <el-select v-model="listQuery.group" filterable placeholder="分组/环境" clearable style="width: 120px" class="filter-item">
+      <el-select v-model="listQuery.group" filterable placeholder="Group/Environment" clearable style="width: 120px" class="filter-item">
         <el-option v-for="item in group_list" :key="item" :label="item" :value="item" />
       </el-select>
-      <el-tooltip effect="light" content="点击清空查询条件" placement="top">
+      <el-tooltip effect="light" content="Click to clear search criteria" placement="top">
         <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-refresh" circle @click="handleReset" />
       </el-tooltip>
       <el-button class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">
-        新增
+        Add New
       </el-button>
       <el-button v-waves :loading="downloadLoading" class="filter-item" type="success" icon="el-icon-download" @click="handleDownload">
-        导出
+        Export
       </el-button>
       <el-upload
         style="margin-right: 9px;"
@@ -34,17 +34,17 @@
         :show-file-list="false"
         :multiple="false"
       >
-        <el-tooltip effect="light" content="点击【导出】可获取导入模板" placement="top">
+      <el-tooltip effect="light" content="Click [Export] to get import template" placement="top">
           <el-button v-waves style="margin-left: 9px;margin-top: 0px;" :loading="downloadLoading" class="filter-item" type="warning" icon="el-icon-upload2">
-            导入
+            Import
           </el-button>
         </el-tooltip>
       </el-upload>
       <el-button class="filter-item" type="danger" icon="el-icon-delete" @click="handleDelAll">
-        批量删除
+        Batch Delete
       </el-button>
       <div style="float: right;margin-left: 9px;">
-        <el-input v-model="iname" prefix-icon="el-icon-search" placeholder="请输入名称或实例进行筛选" clearable style="width:180px" class="filter-item" @input="inameFilter(iname)" />
+        <el-input v-model="iname" prefix-icon="el-icon-search" placeholder="Enter name or instance to filter" clearable style="width:180px" class="filter-item" @input="inameFilter(iname)" />
       </div>
     </div>
 
@@ -63,48 +63,48 @@
           <span>{{ scope.$index+1 }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="vendor" label="机房/公司" sortable align="center">
+      <el-table-column prop="vendor" label="Datacenter/Company" sortable align="center">
         <template slot-scope="{row}">
           <span>{{ row.vendor }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="account" label="租户/部门" sortable align="center">
+      <el-table-column prop="account" label="Tenant/Department" sortable align="center">
         <template slot-scope="{row}">
           <span>{{ row.account }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="region" label="区域/项目" sortable align="center" show-overflow-tooltip>
+      <el-table-column prop="region" label="Region/Project" sortable align="center" show-overflow-tooltip>
         <template slot-scope="{row}">
           <span>{{ row.region }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="group" label="分组/环境" sortable align="center">
+      <el-table-column prop="group" label="Group/Environment" sortable align="center">
         <template slot-scope="{row}">
           <span>{{ row.group }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="name" label="名称" sortable align="center" show-overflow-tooltip>
+      <el-table-column prop="name" label="Name" sortable align="center" show-overflow-tooltip>
         <template slot-scope="{row}">
           <span>{{ row.name }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="instance" label="实例" sortable align="center" width="160" show-overflow-tooltip>
+      <el-table-column prop="instance" label="Instance" sortable align="center" width="160" show-overflow-tooltip>
         <template slot-scope="{row}">
           <span>{{ row.instance }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="os" label="系统" sortable align="center" width="80">
+      <el-table-column prop="os" label="System" sortable align="center" width="80">
         <template slot-scope="{row}">
           <span>{{ row.os }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
+      <el-table-column label="Operations" align="center" width="160" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
-            编辑
+            Edit
           </el-button>
           <el-button size="mini" type="danger" @click="handleDelete(row)">
-            删除
+            Delete
           </el-button>
         </template>
       </el-table-column>
@@ -112,51 +112,51 @@
 
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="handleFilter" />
 
-    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible" width="37%">
-      <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="auto" style="width: 90%; margin-left: 20px;">
-        <font size="3px" color="#ff0000">【注意：前5个字段组合后需唯一，重复会覆盖已有监控项!】</font>
-        <el-form-item label="机房/公司" prop="vendor">
-          <el-autocomplete v-model="temp.vendor" :fetch-suggestions="Sugg_vendor" placeholder="优先选择" clearable class="filter-item" />
-        </el-form-item>
-        <el-form-item label="租户/部门" prop="account">
-          <el-autocomplete v-model="temp.account" :fetch-suggestions="Sugg_account" placeholder="优先选择" clearable class="filter-item" />
-        </el-form-item>
-        <el-form-item label="区域/项目" prop="region">
-          <el-autocomplete v-model="temp.region" :fetch-suggestions="Sugg_region" placeholder="优先选择" clearable class="filter-item" />
-        </el-form-item>
-        <el-form-item label="分组/环境" prop="group">
-          <el-autocomplete v-model="temp.group" :fetch-suggestions="Sugg_group" placeholder="优先选择" clearable class="filter-item" />
-        </el-form-item>
-        <el-form ref="dataForm" :inline="true" :rules="rules" :model="temp" class="demo-form-inline" label-position="right" label-width="50px">
-          <el-form-item label="名称" prop="name">
-            <el-input v-model="temp.name" placeholder="请输入" clearable />
+      <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible" width="37%">
+        <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="auto" style="width: 90%; margin-left: 20px;">
+          <font size="3px" color="#ff0000">【Note: The combination of the first 5 fields must be unique, duplicates will overwrite existing monitoring items!】</font>
+          <el-form-item label="Datacenter/Company" prop="vendor">
+            <el-autocomplete v-model="temp.vendor" :fetch-suggestions="Sugg_vendor" placeholder="Priority selection" clearable class="filter-item" />
           </el-form-item>
-          <el-form-item label="系统" prop="os">
-            <el-select v-model="temp.os" placeholder="请选择" style="width: 130px;" @change="temp.port=osport[temp.os]">
-              <el-option label="linux" value="linux" />
-              <el-option label="windows" value="windows" />
-            </el-select>
+          <el-form-item label="Tenant/Department" prop="account">
+            <el-autocomplete v-model="temp.account" :fetch-suggestions="Sugg_account" placeholder="Priority selection" clearable class="filter-item" />
           </el-form-item>
-          <el-form-item label="IP" prop="ip">
-            <el-input v-model="temp.ip" placeholder="请输入" clearable />
+          <el-form-item label="Region/Project" prop="region">
+            <el-autocomplete v-model="temp.region" :fetch-suggestions="Sugg_region" placeholder="Priority selection" clearable class="filter-item" />
           </el-form-item>
-          <el-form-item label="端口" prop="port">
-            <el-input v-model="temp.port" placeholder="请输入" clearable style="width: 130px;" />
+          <el-form-item label="Group/Environment" prop="group">
+            <el-autocomplete v-model="temp.group" :fetch-suggestions="Sugg_group" placeholder="Priority selection" clearable class="filter-item" />
           </el-form-item>
+          <el-form ref="dataForm" :inline="true" :rules="rules" :model="temp" class="demo-form-inline" label-position="right" label-width="50px">
+            <el-form-item label="Name" prop="name">
+              <el-input v-model="temp.name" placeholder="Please enter" clearable />
+            </el-form-item>
+            <el-form-item label="System" prop="os">
+              <el-select v-model="temp.os" placeholder="Please select" style="width: 130px;" @change="temp.port=osport[temp.os]">
+                <el-option label="linux" value="linux" />
+                <el-option label="windows" value="windows" />
+              </el-select>
+            </el-form-item>
+            <el-form-item label="IP" prop="ip">
+              <el-input v-model="temp.ip" placeholder="Please enter" clearable />
+            </el-form-item>
+            <el-form-item label="Port" prop="port">
+              <el-input v-model="temp.port" placeholder="Please enter" clearable style="width: 130px;" />
+            </el-form-item>
+          </el-form>
         </el-form>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button v-if="dialogStatus==='create'" type="primary" @click="createAndNew">
-          确认并新增
-        </el-button>
-        <el-button @click="dialogFormVisible = false">
-          取消
-        </el-button>
-        <el-button type="primary" @click="dialogStatus==='create'?createData():updateData()">
-          确认
-        </el-button>
-      </div>
-    </el-dialog>
+        <div slot="footer" class="dialog-footer">
+          <el-button v-if="dialogStatus==='create'" type="primary" @click="createAndNew">
+            Confirm and Add New
+          </el-button>
+          <el-button @click="dialogFormVisible = false">
+            Cancel
+          </el-button>
+          <el-button type="primary" @click="dialogStatus==='create'?createData():updateData()">
+            Confirm
+          </el-button>
+        </div>
+      </el-dialog>
 
   </div>
 </template>
@@ -228,25 +228,25 @@ export default {
       dialogFormVisible: false,
       dialogStatus: '',
       textMap: {
-        update: '更新',
-        create: '创建'
+        update: 'Update',
+        create: 'Create'
       },
       rules: {
-        vendor: [{ required: true, message: '此为必填项', trigger: 'change' },
+        vendor: [{ required: true, message: 'This field is required', trigger: 'change' },
           { validator: validateInput, trigger: ['blur', 'change'] }],
-        account: [{ required: true, message: '此为必填项', trigger: 'change' },
+        account: [{ required: true, message: 'This field is required', trigger: 'change' },
           { validator: validateInput, trigger: ['blur', 'change'] }],
-        region: [{ required: true, message: '此为必填项', trigger: 'change' },
+        region: [{ required: true, message: 'This field is required', trigger: 'change' },
           { validator: validateInput, trigger: ['blur', 'change'] }],
-        group: [{ required: true, message: '此为必填项', trigger: 'change' },
+        group: [{ required: true, message: 'This field is required', trigger: 'change' },
           { validator: validateInput, trigger: ['blur', 'change'] }],
-        name: [{ required: true, message: '此为必填项', trigger: 'change' },
+        name: [{ required: true, message: 'This field is required', trigger: 'change' },
           { validator: validateInput, trigger: ['blur', 'change'] }],
-        ip: [{ required: true, message: '此为必填项', trigger: 'change' },
+        ip: [{ required: true, message: 'This field is required', trigger: 'change' },
           { validator: validateInput, trigger: ['blur', 'change'] }],
-        port: [{ required: true, message: '此为必填项', trigger: 'change' },
+        port: [{ required: true, message: 'This field is required', trigger: 'change' },
           { validator: validateInput, trigger: ['blur', 'change'] }],
-        os: [{ required: true, message: '此为必填项', trigger: 'change' },
+        os: [{ required: true, message: 'This field is required', trigger: 'change' },
           { validator: validateInput, trigger: ['blur', 'change'] }]
       },
       downloadLoading: false
@@ -294,12 +294,12 @@ export default {
       const filetype = file.name.replace(/.+\./, '')
       const isRightSize = (file.size || 0) / 1024 / 1024 < uploadLimit
       if (!isRightSize) {
-        this.$message.error(`文件大小超过${uploadLimit}MB！`)
+        this.$message.error(`File size exceeds ${uploadLimit}MB!`)
         return false
       }
       if (uploadTypes.indexOf(filetype.toLowerCase()) === -1) {
         this.$message.warning({
-          message: '仅支持上传xlsx和csv格式的文件！'
+          message: 'Only xlsx and csv format files are supported!'
         })
         return false
       }
@@ -482,9 +482,9 @@ export default {
       })
     },
     handleDelete(row) {
-      this.$confirm('此操作将删除【' + row.group + '：' + row.region + '：' + row.name + '】，是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm(`This operation will delete [${row.group}: ${row.region}: ${row.name}], continue?`, 'Prompt', {
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
         type: 'warning'
       }).then(() => {
         delService(row).then(response => {
@@ -497,14 +497,14 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '已取消删除'
+          message: 'Delete cancelled'
         })
       })
     },
     handleDelAll() {
-      this.$confirm('此操作将批量删除选中行，是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('This operation will batch delete selected rows, continue?', 'Prompt', {
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
         type: 'warning'
       }).then(() => {
         for (let i = 0; i < this.multipleSelection.length; i++) {
@@ -519,14 +519,14 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '已取消删除'
+          message: 'Delete cancelled'
         })
       })
     },
     handleDownload() {
       this.downloadLoading = true
       import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = ['机房/公司', '租户/部门', '区域/项目', '分组/环境', '名称', '实例(IP:端口)', '系统(linux/windows)']
+        const tHeader = ['Datacenter/Company', 'Tenant/Department', 'Region/Project', 'Group/Environment', 'Name', 'Instance(IP:Port)', 'System(linux/windows)']
         const filterVal = ['vendor', 'account', 'region', 'group', 'name', 'instance', 'os']
         const data = this.formatJson(filterVal)
         excel.export_json_to_excel({
