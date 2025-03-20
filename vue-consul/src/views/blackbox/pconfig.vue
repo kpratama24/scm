@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-button v-clipboard:copy="pconfig" v-clipboard:success="onCopy" v-clipboard:error="onError" class="filter-item" type="warning" icon="el-icon-document-copy">
-      复制配置
+      Copy Configuration
     </el-button>
     <pre v-highlightjs="pconfig" style="line-height:120%"><code class="yaml yamlcode" /></pre>
   </div>
@@ -22,12 +22,12 @@ export default {
   methods: {
     onCopy() {
       this.$message({
-        message: '复制成功！',
+        message: 'Copy successful!',
         type: 'success'
       })
     },
     onError() {
-      this.$message.error('复制失败！')
+      this.$message.error('Copy failed!')
     },
     fetchPconfig() {
       this.listLoading = true

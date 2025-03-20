@@ -1,51 +1,51 @@
 <template>
   <div class="app-container">
-    <el-alert type="success" center close-text="朕知道了">
+    <el-alert type="success" center close-text="I understand">
       <el-link icon="el-icon-warning" type="success"
         href="#"
         target="_blank">Consul:Blackbox</el-link>
     </el-alert>
     <div class="filter-container" style="flex: 1;display: flex;align-items: center;height: 50px;">
-      <el-select v-model="listQuery.module" placeholder="监控类型" clearable collapse-tags style="width: 150px"
+      <el-select v-model="listQuery.module" placeholder="Monitor Type" clearable collapse-tags style="width: 150px"
         class="filter-item">
         <el-option v-for="item in module_list" :key="item" :label="item" :value="item" />
       </el-select>
-      <el-select v-model="listQuery.company" placeholder="公司部门" clearable style="width: 150px" class="filter-item">
+      <el-select v-model="listQuery.company" placeholder="Company Department" clearable style="width: 150px" class="filter-item">
         <el-option v-for="item in company_list" :key="item" :label="item" :value="item" />
       </el-select>
-      <el-select v-model="listQuery.project" filterable placeholder="项目" clearable style="width: 150px"
+      <el-select v-model="listQuery.project" filterable placeholder="Project" clearable style="width: 150px"
         class="filter-item">
         <el-option v-for="item in project_list" :key="item" :label="item" :value="item" />
       </el-select>
-      <el-select v-model="listQuery.env" filterable placeholder="环境" clearable style="width: 120px" class="filter-item">
+      <el-select v-model="listQuery.env" filterable placeholder="Environment" clearable style="width: 120px" class="filter-item">
         <el-option v-for="item in env_list" :key="item" :label="item" :value="item" />
       </el-select>
-      <el-tooltip effect="light" content="点击清空查询条件" placement="top">
+      <el-tooltip effect="light" content="Click to clear search criteria" placement="top">
         <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-refresh" circle
           @click="handleReset" />
       </el-tooltip>
       <el-button class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">
-        新增
+        Add New
       </el-button>
       <el-button v-waves :loading="downloadLoading" class="filter-item" type="success" icon="el-icon-download"
         @click="handleDownload">
-        导出
+        Export
       </el-button>
       <el-upload style="margin-right: 10px;" class="upload-demo" action="/api/blackbox/upload" :headers="myHeaders"
         :on-success="success" :on-error="error" accept=".xlsx, .csv" :before-upload="handleBeforeUpload"
         :show-file-list="false" :multiple="false">
-        <el-tooltip effect="light" content="点击【导出】可获取导入模板" placement="top">
+        <el-tooltip effect="light" content="Click [Export] to get import template" placement="top">
           <el-button v-waves style="margin-left: 10px;margin-top: 0px;" :loading="downloadLoading" class="filter-item"
             type="warning" icon="el-icon-upload2">
-            导入
+            Import
           </el-button>
         </el-tooltip>
       </el-upload>
       <el-button class="filter-item" type="danger" icon="el-icon-delete" @click="handleDelAll">
-        批量删除
+        Batch Delete
       </el-button>
       <div style="float: right;margin-left: 10px;">
-        <el-input v-model="iname" prefix-icon="el-icon-search" placeholder="名称或URL筛选" clearable style="width:180px"
+        <el-input v-model="iname" prefix-icon="el-icon-search" placeholder="Filter by Name or URL" clearable style="width:180px"
           class="filter-item" @input="inameFilter(iname)" />
       </div>
     </div>
@@ -59,27 +59,27 @@
           <span>{{ scope.$index + 1 }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="module" label="监控类型" sortable width="130px" align="center">
+      <el-table-column prop="module" label="Monitor Type" sortable width="130px" align="center">
         <template slot-scope="{row}">
           <span>{{ row.module }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="company" label="公司部门" sortable width="110px" align="center">
+      <el-table-column prop="company" label="Company Department" sortable width="110px" align="center">
         <template slot-scope="{row}">
           <span>{{ row.company }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="project" label="项目" sortable width="180px" align="center" show-overflow-tooltip>
+      <el-table-column prop="project" label="Project" sortable width="180px" align="center" show-overflow-tooltip>
         <template slot-scope="{row}">
           <span>{{ row.project }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="env" label="环境" sortable align="center" width="73px">
+      <el-table-column prop="env" label="Environment" sortable align="center" width="73px">
         <template slot-scope="{row}">
           <span>{{ row.env }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="name" label="名称" sortable width="200px" align="center" show-overflow-tooltip>
+      <el-table-column prop="name" label="Name" sortable width="200px" align="center" show-overflow-tooltip>
         <template slot-scope="{row}">
           <span>{{ row.name }}</span>
         </template>
@@ -89,13 +89,13 @@
           <span style="font-size: 12px">{{ row.instance }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" width="160" class-name="small-padding fixed-width">
+      <el-table-column label="Actions" align="center" width="160" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
-            编辑
+            Edit
           </el-button>
           <el-button size="mini" type="danger" @click="handleDelete(row)">
-            删除
+            Delete
           </el-button>
         </template>
       </el-table-column>
@@ -110,54 +110,54 @@
         <el-form-item prop="module">
           <span slot="label">
             <span class="span-box">
-              <span>监控类型</span>
+              <span>Monitor Type</span>
               <el-tooltip style="diaplay:inline" effect="dark"
-                content="该字段必须和Blackbox配置中的module名称保持一致，如：http_2xx，http_post_2xx，tcp_connect 等。" placement="top">
+                content="This field must match the module name in Blackbox configuration, such as: http_2xx, http_post_2xx, tcp_connect, etc." placement="top">
                 <i class="el-icon-info" />
               </el-tooltip>
             </span>
           </span>
-          <el-autocomplete v-model="temp.module" :fetch-suggestions="Sugg_module" placeholder="优先选择，填写可新增" clearable
+          <el-autocomplete v-model="temp.module" :fetch-suggestions="Sugg_module" placeholder="Choose first, fill to add new" clearable
             class="filter-item" />
         </el-form-item>
-        <el-form-item label="公司部门" prop="company">
-          <el-autocomplete v-model="temp.company" :fetch-suggestions="Sugg_company" placeholder="优先选择，填写可新增" clearable
+        <el-form-item label="Company Department" prop="company">
+          <el-autocomplete v-model="temp.company" :fetch-suggestions="Sugg_company" placeholder="Choose first, fill to add new" clearable
             class="filter-item" />
         </el-form-item>
-        <el-form-item label="项目" prop="project">
-          <el-autocomplete v-model="temp.project" :fetch-suggestions="Sugg_project" placeholder="优先选择，填写可新增" clearable
+        <el-form-item label="Project" prop="project">
+          <el-autocomplete v-model="temp.project" :fetch-suggestions="Sugg_project" placeholder="Choose first, fill to add new" clearable
             class="filter-item" />
         </el-form-item>
-        <el-form-item label="环境" prop="env">
-          <el-autocomplete v-model="temp.env" :fetch-suggestions="Sugg_env" placeholder="优先选择，填写可新增" clearable
+        <el-form-item label="Environment" prop="env">
+          <el-autocomplete v-model="temp.env" :fetch-suggestions="Sugg_env" placeholder="Choose first, fill to add new" clearable
             class="filter-item" />
         </el-form-item>
-        <el-form-item label="名称" prop="name">
-          <el-input v-model="temp.name" placeholder="请输入" clearable class="filter-item" /><br>
-          <font size="3px" color="#ff0000">以上5个字段组合后需唯一，重复会覆盖已有监控项!</font>
+        <el-form-item label="Name" prop="name">
+          <el-input v-model="temp.name" placeholder="Please input" clearable class="filter-item" /><br>
+          <font size="3px" color="#ff0000">The combination of the above 5 fields must be unique, duplicates will overwrite existing monitoring items!</font>
         </el-form-item>
         <el-form-item prop="instance">
           <span slot="label">
             <span class="span-box">
               <span>URL</span>
               <el-tooltip style="diaplay:inline" effect="dark"
-                content="TCP类检查格式为：IP:端口 ，HTTP类检查格式为完整的URL，必须以http(s)://开头，ICMP检查仅填IP或域名。" placement="top">
+                content="TCP check format: IP:port, HTTP check format: complete URL must start with http(s)://, ICMP check only fill IP or domain name." placement="top">
                 <i class="el-icon-info" />
               </el-tooltip>
             </span>
           </span>
-          <el-input v-model="temp.instance" placeholder="一次仅添加一个URL，批量添加可使用导入" clearable class="filter-item" />
+          <el-input v-model="temp.instance" placeholder="Add only one URL at a time, use import for batch adding" clearable class="filter-item" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button v-if="dialogStatus === 'create'" type="primary" @click="createAndNew">
-          确认并新增
+          Confirm and Add New
         </el-button>
         <el-button @click="dialogFormVisible = false">
-          取消
+          Cancel
         </el-button>
         <el-button type="primary" @click="dialogStatus === 'create' ? createData() : updateData()">
-          确认
+          Confirm
         </el-button>
       </div>
     </el-dialog>
@@ -187,7 +187,7 @@ export default {
   data() {
     const validateInput = (rule, value, callback) => {
       if (!this.checkSpecialKey(value)) {
-        callback(new Error('不能含有空格或 [ ]`~!#$^&*=|"{}\':;?\\'))
+        callback(new Error('Cannot contain spaces or [ ]`~!#$^&*=|"{}\':;?\\'))
       } else {
         callback()
       }
@@ -229,21 +229,21 @@ export default {
       dialogFormVisible: false,
       dialogStatus: '',
       textMap: {
-        update: '更新',
-        create: '创建URL监控'
+        update: 'Update',
+        create: 'Create URL Monitor'
       },
       rules: {
-        module: [{ required: true, message: '此为必填项', trigger: 'change' },
+        module: [{ required: true, message: 'This field is required', trigger: 'change' },
         { validator: validateInput, trigger: ['blur', 'change'] }],
-        company: [{ required: true, message: '此为必填项', trigger: 'change' },
+        company: [{ required: true, message: 'This field is required', trigger: 'change' },
         { validator: validateInput, trigger: ['blur', 'change'] }],
-        project: [{ required: true, message: '此为必填项', trigger: 'change' },
+        project: [{ required: true, message: 'This field is required', trigger: 'change' },
         { validator: validateInput, trigger: ['blur', 'change'] }],
-        env: [{ required: true, message: '此为必填项', trigger: 'change' },
+        env: [{ required: true, message: 'This field is required', trigger: 'change' },
         { validator: validateInput, trigger: ['blur', 'change'] }],
-        name: [{ required: true, message: '此为必填项', trigger: 'change' },
+        name: [{ required: true, message: 'This field is required', trigger: 'change' },
         { validator: validateInput, trigger: ['blur', 'change'] }],
-        instance: [{ required: true, message: '此为必填项', trigger: 'change' }]
+        instance: [{ required: true, message: 'This field is required', trigger: 'change' }]
       },
       downloadLoading: false
     }
@@ -290,12 +290,12 @@ export default {
       const filetype = file.name.replace(/.+\./, '')
       const isRightSize = (file.size || 0) / 1024 / 1024 < uploadLimit
       if (!isRightSize) {
-        this.$message.error(`文件大小超过${uploadLimit}MB！`)
+        this.$message.error(`File size exceeds ${uploadLimit}MB!`)
         return false
       }
       if (uploadTypes.indexOf(filetype.toLowerCase()) === -1) {
         this.$message.warning({
-          message: '仅支持上传xlsx和csv格式的文件！'
+          message: 'Only supports uploading xlsx and csv format files!'
         })
         return false
       }
@@ -470,9 +470,9 @@ export default {
       })
     },
     handleDelete(row) {
-      this.$confirm('此操作将删除【' + row.env + '：' + row.project + '：' + row.name + '】，是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm(`This operation will delete [${row.env}: ${row.project}: ${row.name}], continue?`, 'Tip', {
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
         type: 'warning'
       }).then(() => {
         delService(row).then(response => {
@@ -485,14 +485,14 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '已取消删除'
+          message: 'Delete cancelled'
         })
       })
     },
     handleDelAll() {
-      this.$confirm('此操作将批量删除选中行，是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('This operation will batch delete selected rows, continue?', 'Tip', {
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
         type: 'warning'
       }).then(() => {
         for (let i = 0; i < this.multipleSelection.length; i++) {
@@ -507,14 +507,14 @@ export default {
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '已取消删除'
+          message: 'Delete cancelled'
         })
       })
     },
     handleDownload() {
       this.downloadLoading = true
       import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = ['监控模块', '公司部门', '项目', '环境', '名称', 'URL(tcp的格式为IP:端口,URL需要以http(s)://开头)']
+        const tHeader = ['Monitor Module', 'Company Department', 'Project', 'Environment', 'Name', 'URL(TCP format is IP:port, URL must start with http(s)://)']
         const filterVal = ['module', 'company', 'project', 'env', 'name', 'instance']
         const data = this.formatJson(filterVal)
         excel.export_json_to_excel({

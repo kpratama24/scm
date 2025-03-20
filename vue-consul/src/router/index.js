@@ -93,6 +93,46 @@ export const constantRoutes = [
           }
         ]
       },
+      
+    ]
+  },
+  {
+    path: '/blackbox',
+    component: Layout,
+    redirect: '/blackbox/index',
+    name: 'Site and API Monitoring',
+    meta: { title: 'Site and API Monitoring', icon: 'tree' },
+    children: [
+      {
+        path: 'index',
+        name: 'Site Management',
+        component: () => import('@/views/blackbox/index'),
+        meta: { title: 'Site Management', icon: 'el-icon-s-order' }
+      },
+      {
+        path: 'bconfig',
+        name: 'Blackbox Config',
+        component: () => import('@/views/blackbox/bconfig'),
+        meta: { title: 'Blackbox Config', icon: 'el-icon-c-scale-to-original' }
+      },
+      {
+        path: 'pconfig',
+        name: 'Prometheus Config',
+        component: () => import('@/views/blackbox/pconfig'),
+        meta: { title: 'Prometheus Config', icon: 'el-icon-set-up' }
+      },
+      {
+        path: 'rules',
+        name: 'Alert Rules',
+        component: () => import('@/views/blackbox/rules'),
+        meta: { title: 'Alert Rules', icon: 'el-icon-bell' }
+      },
+      {
+        path: 'grafana',
+        name: 'Grafana Dashboard',
+        component: () => import('@/views/blackbox/grafana'),
+        meta: { title: 'Grafana Setup', icon: 'el-icon-data-line' }
+      }
     ]
   },
   {
