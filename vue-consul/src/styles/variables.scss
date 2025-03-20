@@ -1,13 +1,13 @@
 // sidebar
-$menuText:#f1d4d3;
-$menuActiveText:#ffcc29;
-$subMenuActiveText:#ffffff; //https://github.com/ElemeFE/element/issues/12951
+$menuText: #e5e5e5;        // Light gray for text
+$menuActiveText: #ffcc29;   // Keeping the yellow for active text for contrast
+$subMenuActiveText: #ffffff; // White for active submenu text
 
-$menuBg: #be211a;      
-$menuHover: #9c1b16;   // Slightly darker red for hover state
+$menuBg: #333333;          // Dark gray as the main color
+$menuHover: #2a2a2a;       // Slightly darker gray for hover state
 
-$subMenuBg: #721510;   
-$subMenuHover: #4a0e0a; // Very dark red for submenu hover
+$subMenuBg: #1a1a1a;       // Very dark gray for submenu
+$subMenuHover: #0d0d0d;    // Nearly black for submenu hover
 
 $sideBarWidth: 210px;
 
