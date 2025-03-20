@@ -83,7 +83,7 @@ export const constantRoutes = [
             path: 'rules',
             name: 'node-rules',
             component: () => import('@/views/node-exporter/rules'),
-            meta: { title: 'Node Rules', icon: 'el-icon-bell' }
+            meta: { title: 'Alert Rules', icon: 'el-icon-bell' }
           },
           {
             path: 'grafana',
@@ -93,7 +93,38 @@ export const constantRoutes = [
           }
         ]
       },
-      
+      {
+        path: 'rds',
+        name: 'RDS',
+        component: () => import('@/views/rds/index'),
+        meta: { title: 'MySQL', icon: 'el-icon-coin' },
+        children: [
+          {
+            path: 'self',
+            name: 'MySQL List',
+            component: () => import('@/views/rds/self'),
+            meta: { title: 'MySQL List', icon: 'el-icon-s-platform' }
+          },
+          {
+            path: 'pconfig',
+            name: 'rds-pconfig',
+            component: () => import('@/views/rds/pconfig'),
+            meta: { title: 'Prometheus Conf', icon: 'el-icon-set-up' }
+          },
+          {
+            path: 'rules',
+            name: 'rds-rules',
+            component: () => import('@/views/rds/rules'),
+            meta: { title: 'Alert Rules', icon: 'el-icon-bell' }
+          },
+          {
+            path: 'grafana',
+            name: 'rds-grafana',
+            component: () => import('@/views/rds/grafana'),
+            meta: { title: 'Grafana Setup', icon: 'el-icon-data-line' }
+          }
+        ]
+      },      
     ]
   },
   {
@@ -134,16 +165,6 @@ export const constantRoutes = [
         meta: { title: 'Grafana Setup', icon: 'el-icon-data-line' }
       }
     ]
-  },
-  {
-    path: '/avd',
-    component: Layout,
-    children: [{
-      path: 'index',
-      name: 'Alert',
-      component: () => import('@/views/avd/index'),
-      meta: { title: 'Alert', icon: 'el-icon-chat-line-square' }
-    }]
   },
 
   // 404 page must be placed at the end !!!

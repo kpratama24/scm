@@ -1,23 +1,23 @@
 <template>
   <div class="app-container">
-    <el-select v-model="services" multiple placeholder="选择需要自动发现的MySQL组" filterable collapse-tags clearable
+    <el-select v-model="services" multiple placeholder="Select MySQL groups for auto-discovery" filterable collapse-tags clearable
       style="width: 260px" class="filter-item">
       <el-option v-for="item in services_list" :key="item" :label="item" :value="item" />
     </el-select>
-    <el-input v-model="exporter" placeholder="Mysqld_Exporter IP端口" clearable style="width: 200px;"
+    <el-input v-model="exporter" placeholder="Mysqld_Exporter IP and port" clearable style="width: 200px;"
       class="filter-item" />&nbsp;&nbsp;
-    <el-select v-model="jobrds" multiple placeholder="选择需要采集指标的MySQL组" filterable collapse-tags clearable
+    <el-select v-model="jobrds" multiple placeholder="Select MySQL groups for metric collection" filterable collapse-tags clearable
       style="width: 260px" class="filter-item">
       <el-option v-for="item in jobrds_list" :key="item" :label="item" :value="item" />
     </el-select>
-    <el-input v-model="cm_exporter" placeholder="TenSunS Web IP端口" clearable style="width: 190px;"
+    <el-input v-model="cm_exporter" placeholder="TenSunS Web IP and port" clearable style="width: 190px;"
       class="filter-item" />&nbsp;&nbsp;
     <el-button class="filter-item" type="primary" icon="el-icon-magic-stick" @click="fetchRdsConfig">
-      生成配置
+      Generate Configuration
     </el-button>
     <el-button v-clipboard:copy="configs" v-clipboard:success="onCopy" v-clipboard:error="onError" class="filter-item"
       type="warning" icon="el-icon-document-copy">
-      复制配置
+      Copy Configuration
     </el-button>
     <pre v-highlightjs="configs" style="line-height:120%"><code class="yaml yamlcode" /></pre>
   </div>
@@ -37,7 +37,7 @@ export default {
       jobrds_list: [],
       exporter: '',
       cm_exporter: '',
-      configs: '该功能用于生成Prometheus的两个JOB配置，生成后请复制到Prometheus配置中：\n\n1. 选择需要同步的账号，Prometheus即可自动发现该账号下的所有MySQL实例。\n\n2. 由于Mysqld_Exporter无法监控到云数据库的CPU、内存、磁盘的使用情况，所以TenSunS开发了Exporter功能，配置到Prometheus即可直接从云厂商采集到这些指标！\n   选择需要采集指标的RDS账号区域，即可生成Prometheus的JOB配置。'
+      configs: 'This feature is used to generate two Prometheus JOB configurations. After generation, please copy to your Prometheus configuration:\n\n1. Select accounts to synchronize, and Prometheus will automatically discover all MySQL instances under these accounts.\n\n2. Since Mysqld_Exporter cannot monitor cloud database CPU, memory, and disk usage, TenSunS has developed an Exporter function. Configure it to Prometheus to collect these metrics directly from cloud providers!\n   Select the RDS account regions you need to collect metrics from to generate the Prometheus JOB configuration.'
     }
   },
   created() {
@@ -46,12 +46,12 @@ export default {
   methods: {
     onCopy() {
       this.$message({
-        message: '复制成功！',
+        message: 'Copy successful!',
         type: 'success'
       })
     },
     onError() {
-      this.$message.error('复制失败！')
+      this.$message.error('Copy failed!')
     },
     fetchRdsList() {
       this.listLoading = true

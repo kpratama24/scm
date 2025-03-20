@@ -1,37 +1,37 @@
 <template>
   <div class="app-container">
-    <el-select v-model="jobrds_name" placeholder="请选择需要查询的云MySQL列表" filterable collapse-tags clearable style="width: 350px" class="filter-item" @change="fetchRds(jobrds_name)">
+    <el-select v-model="jobrds_name" placeholder="Please select a Cloud MySQL list to query" filterable collapse-tags clearable style="width: 350px" class="filter-item" @change="fetchRds(jobrds_name)">
       <el-option v-for="item in jobrds_list" :key="item" :label="item" :value="item" />
     </el-select>
-    <el-checkbox v-model="checked" style="margin-left: 10px;" label="仅显示修改过的" border @change="cstRdsList(jobrds_name,checked)" />
-    <el-tooltip effect="light" content="刷新当前RDS列表" placement="top">
+    <el-checkbox v-model="checked" style="margin-left: 10px;" label="Show only modified" border @change="cstRdsList(jobrds_name,checked)" />
+    <el-tooltip effect="light" content="Refresh current RDS list" placement="top">
       <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-refresh" circle @click="fetchEcs(jobrds_name)" />
     </el-tooltip>
     <div style="float: right;margin-left: 10px;">
-      <el-input v-model="iname" prefix-icon="el-icon-search" placeholder="请输入名称、实例或实例ID进行筛选" clearable style="width: 300px" class="filter-item" />
+      <el-input v-model="iname" prefix-icon="el-icon-search" placeholder="Enter name, instance or instance ID to filter" clearable style="width: 300px" class="filter-item" />
     </div>
-    <el-dialog title="自定义实例信息" :visible.sync="dialogFormVisible" width="45%">
+    <el-dialog title="Custom Instance Information" :visible.sync="dialogFormVisible" width="45%">
       <el-form ref="dataForm" :model="cst_rds" label-position="right" label-width="auto" style="width: 90%; margin-left: 20px;">
-        <el-form-item label="自定义端口">
+        <el-form-item label="Custom Port">
           <el-switch v-model="cst_rds.portswitch" />
         </el-form-item>
-        <el-form-item v-if="cst_rds.portswitch" required label="端口：">
+        <el-form-item v-if="cst_rds.portswitch" required label="Port:">
           <el-input v-model="cst_rds.port" />
         </el-form-item>
-        <el-form-item label="自定义IP">
+        <el-form-item label="Custom IP">
           <el-switch v-model="cst_rds.ipswitch" />
         </el-form-item>
-        <el-form-item v-if="cst_rds.ipswitch" required label="IP：">
+        <el-form-item v-if="cst_rds.ipswitch" required label="IP:">
           <el-input v-model="cst_rds.ip" />
         </el-form-item>
-        <font size="3px" color="#ff0000">如需恢复同步该实例的IP端口信息，请关闭开启的自定义选项后，再同步一次所属数据源。</font>
+        <font size="3px" color="#ff0000">To restore synchronized IP and port information for this instance, turn off the enabled custom options, then synchronize the data source once more.</font>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">
-          取消
+          Cancel
         </el-button>
         <el-button type="primary" @click="createData">
-          确认
+          Confirm
         </el-button>
       </div>
     </el-dialog>
@@ -46,27 +46,27 @@
       style="width: 100%;"
     >
       <el-table-column type="index" align="center" />
-      <el-table-column prop="group" label="分组" sortable align="center" width="150" show-overflow-tooltip />
-      <el-table-column prop="name" label="名称" sortable align="center" width="220" show-overflow-tooltip />
-      <el-table-column prop="instance" label="实例" sortable align="center" width="180">
+      <el-table-column prop="group" label="Group" sortable align="center" width="150" show-overflow-tooltip />
+      <el-table-column prop="name" label="Name" sortable align="center" width="220" show-overflow-tooltip />
+      <el-table-column prop="instance" label="Instance" sortable align="center" width="180">
         <template slot-scope="{row}">
           <span style="font-weight:bold">{{ row.instance }} </span>
           <el-tooltip style="diaplay:inline" effect="dark" placement="top">
-            <div slot="content"> 域名：{{ row.domain }}</div>
+            <div slot="content"> Domain: {{ row.domain }}</div>
             <i class="el-icon-info" />
           </el-tooltip>
         </template>
       </el-table-column>
-      <el-table-column prop="ver" label="版本" sortable align="center" width="80" />
+      <el-table-column prop="ver" label="Version" sortable align="center" width="80" />
       <el-table-column prop="cpu" label="CPU" sortable align="center" width="80" />
-      <el-table-column prop="mem" label="内存" sortable align="center" width="80" />
-      <el-table-column prop="disk" label="磁盘" sortable align="center" width="80" />
-      <el-table-column prop="exp" label="到期日" sortable align="center" width="120" />
-      <el-table-column prop="iid" label="实例ID" sortable align="center" />
-      <el-table-column label="操作" align="center" width="120" class-name="small-padding fixed-width">
+      <el-table-column prop="mem" label="Memory" sortable align="center" width="80" />
+      <el-table-column prop="disk" label="Disk" sortable align="center" width="80" />
+      <el-table-column prop="exp" label="Expiry Date" sortable align="center" width="120" />
+      <el-table-column prop="iid" label="Instance ID" sortable align="center" />
+      <el-table-column label="Actions" align="center" width="120" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
           <el-button type="primary" size="mini" @click="handleUpdate(row.iid)">
-            自定义实例
+            Customize Instance
           </el-button>
         </template>
       </el-table-column>
