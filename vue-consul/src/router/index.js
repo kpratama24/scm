@@ -166,6 +166,21 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/report',
+    component: Layout,
+    redirect: '/report/index',
+    name: 'Customer Reporting',
+    meta: { title: 'Customer Reporting', icon: 'el-icon-data-line'},
+    children: [
+      {
+        path: 'index',
+        name: 'Report Management',
+        component: () => import('@/views/report/index'),
+        meta: {title : 'Report Management', icon: 'el-icon-data-line'}
+      }
+    ]
+  },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
