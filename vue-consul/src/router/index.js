@@ -178,7 +178,13 @@ export const constantRoutes = [
         name: 'Report Management',
         component: () => import('@/views/report/index'),
         meta: {title : 'Report Management', icon: 'el-icon-data-line'}
-      }
+      },
+      {
+        path: 'self',
+        name: 'Report Actions',
+        component: () => import('@/views/report/self'),
+        meta: {title : 'Report Actions', icon: 'el-icon-set-up'}
+      },
     ]
   },
 
