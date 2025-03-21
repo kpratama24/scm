@@ -1,10 +1,5 @@
 <template>
   <div class="app-container">
-    <el-alert type="success" center close-text="I understand">
-      <el-link icon="el-icon-warning" type="success"
-        href="#"
-        target="_blank">Consul:Blackbox</el-link>
-    </el-alert>
     <div class="filter-container" style="flex: 1;display: flex;align-items: center;height: 50px;">
       <el-select v-model="listQuery.module" placeholder="Monitor Type" clearable collapse-tags style="width: 150px"
         class="filter-item">

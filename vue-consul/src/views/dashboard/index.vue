@@ -21,6 +21,18 @@
           <p>ECS Translation Completed</p>
         </el-card>
       </el-timeline-item>
+      <el-timeline-item timestamp="2025/03/19" placement="top">
+        <el-card>
+          <h4>v1.0.2</h4>
+          <p>Blackbox Translation Completed</p>
+        </el-card>
+      </el-timeline-item>
+      <el-timeline-item timestamp="2025/03/20" placement="top">
+        <el-card>
+          <h4>v1.0.3</h4>
+          <p>RDS/MySQL Translation Completed</p>
+        </el-card>
+      </el-timeline-item>
     </el-timeline>
   </div>
 </template>
