@@ -4,7 +4,7 @@
       <el-select v-model="listQuery.vendor" placeholder="Datacenter/Company" clearable collapse-tags style="width: 150px" class="filter-item">
         <el-option v-for="item in vendor_list" :key="item" :label="item" :value="item" />
       </el-select>
-      <el-select v-model="listQuery.account" placeholder="Tenant/Department" clearable style="width: 150px" class="filter-item">
+      <el-select v-model="listQuery.account" placeholder="UID/Department" clearable style="width: 150px" class="filter-item">
         <el-option v-for="item in account_list" :key="item" :label="item" :value="item" />
       </el-select>
       <el-select v-model="listQuery.region" filterable placeholder="Region/Project" clearable style="width: 150px" class="filter-item">
@@ -68,7 +68,7 @@
           <span>{{ row.vendor }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="account" label="Tenant/Department" sortable align="center">
+      <el-table-column prop="account" label="UID/Department" sortable align="center">
         <template slot-scope="{row}">
           <span>{{ row.account }}</span>
         </template>
@@ -118,7 +118,7 @@
           <el-form-item label="Datacenter/Company" prop="vendor">
             <el-autocomplete v-model="temp.vendor" :fetch-suggestions="Sugg_vendor" placeholder="Priority selection" clearable class="filter-item" />
           </el-form-item>
-          <el-form-item label="Tenant/Department" prop="account">
+          <el-form-item label="UID/Department" prop="account">
             <el-autocomplete v-model="temp.account" :fetch-suggestions="Sugg_account" placeholder="Priority selection" clearable class="filter-item" />
           </el-form-item>
           <el-form-item label="Region/Project" prop="region">
@@ -526,7 +526,7 @@ export default {
     handleDownload() {
       this.downloadLoading = true
       import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = ['Datacenter/Company', 'Tenant/Department', 'Region/Project', 'Group/Environment', 'Name', 'Instance(IP:Port)', 'System(linux/windows)']
+        const tHeader = ['Datacenter/Company', 'UID/Department', 'Region/Project', 'Group/Environment', 'Name', 'Instance(IP:Port)', 'System(linux/windows)']
         const filterVal = ['vendor', 'account', 'region', 'group', 'name', 'instance', 'os']
         const data = this.formatJson(filterVal)
         excel.export_json_to_excel({

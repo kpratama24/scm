@@ -2,7 +2,7 @@
     <div class="footer">
       <div class="footer-content">
         <!-- Your footer content goes here -->
-        <p>&copy; 2025 Your Company. All rights reserved.</p>
+        <p>&copy; 2025 PT. Sisnet Mitra Sejahtera. All rights reserved.</p>
       </div>
     </div>
   </template>
